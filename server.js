@@ -1,36 +1,46 @@
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080 });
 const fs = require('fs');
-const path = './stats.json';
+const h2hPath = './h2h_stats.json';
+const statPath = 'stats.json'
 
 let clients = []; // List of all connected clients
 let availablePlayers = []; // List of players who are not in a game
-let headToHeadStats = {};  // Stores stats between player pairs
 
 
 
 // Load stats from file
 function loadStats() {
-  if (fs.existsSync(path)) {
-    const data = fs.readFileSync(path);
+  if (fs.existsSync(statPath)) {
+    const data = fs.readFileSync(statPath);
     return JSON.parse(data);
   }
   return {};
 }
 
-// // Save stats to file
-// function saveStats(stats) {
-//   console.log('saving stats')
-//   fs.writeFileSync(path, JSON.stringify(stats, null, 2));
-// }
+// Load stats from file
+function loadHeadToHeadStats() {
+  if (fs.existsSync(h2hPath)) {
+    const data = fs.readFileSync(h2hPath);
+    return JSON.parse(data);
+  }
+  return {};
+}
+
+// Save stats to file
+function saveStats(stats) {
+  console.log('saving stats')
+  fs.writeFileSync(statPath, JSON.stringify(stats, null, 2));
+}
 
 function saveHeadToHeadStats(stats) {
   console.log('saving h2h stats')
-  fs.writeFileSync(path, JSON.stringify(stats, null, 2));
+  fs.writeFileSync(h2hPath, JSON.stringify(stats, null, 2));
 }
 
 // Initialize stats if the file doesn't exist
 let playerStats = loadStats();
+let headToHeadStats = loadHeadToHeadStats()
 
 wss.on('connection', (ws) => {
   ws.username = null;
@@ -59,6 +69,8 @@ wss.on('connection', (ws) => {
       } else {
         ws.username = data.username;
         console.log(`Username set: ${ws.username}`);
+        ws.send(JSON.stringify({ type: 'playerStats', playerStats: getStatsForPlayer(data.username) }));
+        console.log(getStatsForPlayer(data.username))
         availablePlayers.push(ws);
         broadcastAvailablePlayers();
       }
@@ -276,7 +288,7 @@ function updateStats(winner, loser, isDraw = false) {
   }
 
   // Save the updated stats to the file (or database)
-  // saveStats(playerStats);
+  saveStats(playerStats);
 }
 
 // Function to get the stats key for two players

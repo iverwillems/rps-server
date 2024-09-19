@@ -1,0 +1,14 @@
+{
+  "e_vs_i": {
+    "wins": 1,
+    "losses": 1,
+    "draws": 0,
+    "gamesPlayed": 1
+  },
+  "e_vs_g": {
+    "wins": 2,
+    "losses": 2,
+    "draws": 0,
+    "gamesPlayed": 2
+  }
+}
