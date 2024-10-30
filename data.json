@@ -164,7 +164,12 @@
         "game_1730218307472",
         "game_1730218390803"
       ],
-      "friends": []
+      "friends": [
+        "ezra",
+        "sophie",
+        "soof",
+        "e"
+      ]
     },
     "ezra": {
       "gamesPlayed": [
@@ -176,7 +181,11 @@
       ],
       "friends": [
         "iver",
-        "eee"
+        "eee",
+        "soof",
+        "e",
+        "ezra",
+        "ezra"
       ]
     },
     "eee": {
@@ -567,7 +576,10 @@
     },
     "e": {
       "gamesPlayed": [],
-      "friends": []
+      "friends": [
+        "iver",
+        "ezra"
+      ]
     },
     "ewgweg": {
       "gamesPlayed": [],
@@ -681,7 +693,9 @@
     },
     "soof": {
       "gamesPlayed": [],
-      "friends": []
+      "friends": [
+        "ezra"
+      ]
     },
     "wre": {
       "gamesPlayed": [],

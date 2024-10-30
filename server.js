@@ -151,8 +151,12 @@ function calculateStats(playerName, gamesPlayed, data) {
     totalGames: 0,
     totalWins: 0,
     totalLosses: 0,
-    moves: {},
-    roundsPlayed: 0,
+    moves: {
+      rock: { roundsPlayed: 0, wins: 0, losses: 0 },
+      paper: { roundsPlayed: 0, wins: 0, losses: 0 },
+      scissors: { roundsPlayed: 0, wins: 0, losses: 0 },
+    },
+    totalRoundsPlayed: 0,
     winRate: 0,
     mostPlayedMove: null,
     averageRoundsPerGame: 0,
@@ -160,16 +164,14 @@ function calculateStats(playerName, gamesPlayed, data) {
 
   // Iterate through the user's played games
   gamesPlayed.forEach((gameId) => {
-    console.log(gameId);
     const game = games[gameId];
 
     // Skip if game doesn't exist or if player didn't participate
     if (!game || !game.players[playerName]) return;
 
     const playerData = game.players[playerName];
-
     stats.totalGames++;
-    stats.roundsPlayed += game.rounds.length;
+    stats.totalRoundsPlayed += game.rounds.length;
 
     if (playerData.result === "win") {
       stats.totalWins++;
@@ -177,12 +179,18 @@ function calculateStats(playerName, gamesPlayed, data) {
       stats.totalLosses++;
     }
 
-    // Count moves
-    playerData.moves.forEach((move) => {
-      if (!stats.moves[move]) {
-        stats.moves[move] = 0;
+    // Count moves and their outcomes
+    playerData.moves.forEach((move, index) => {
+      if (stats.moves[move]) {
+        stats.moves[move].roundsPlayed++;
+
+        // Check if this move was a win or loss in the round
+        if (game.rounds[index].winner === playerName) {
+          stats.moves[move].wins++;
+        } else {
+          stats.moves[move].losses++;
+        }
       }
-      stats.moves[move]++;
     });
   });
 
@@ -194,15 +202,16 @@ function calculateStats(playerName, gamesPlayed, data) {
     let mostPlayedMove = null;
     let mostPlayedCount = 0;
     for (const move in stats.moves) {
-      if (stats.moves[move] > mostPlayedCount) {
+      const moveRounds = stats.moves[move].roundsPlayed;
+      if (moveRounds > mostPlayedCount) {
         mostPlayedMove = move;
-        mostPlayedCount = stats.moves[move];
+        mostPlayedCount = moveRounds;
       }
     }
 
     stats.mostPlayedMove = mostPlayedMove;
     stats.averageRoundsPerGame = (
-      stats.roundsPlayed / stats.totalGames
+      stats.totalRoundsPlayed / stats.totalGames
     ).toFixed(2);
   }
 
@@ -597,6 +606,50 @@ wss.on("connection", (ws) => {
         );
       } else {
         console.log(`Error: Opponent not found or not in game for rematch.`);
+      }
+    }
+
+    if (data.type === "addFriend") {
+      const d = loadData();
+      const friend = data.friend;
+      const user = getUser(ws.username);
+      if (
+        user.friends.includes(friend) ||
+        d.users[friend] === undefined ||
+        friend === ws.username ||
+        friend === null
+      ) {
+        console.log("cannot be friends");
+        ws.send(
+          JSON.stringify({
+            type: "friendError",
+            message: `cannot be friends`,
+          })
+        );
+      } else {
+        user.friends.push(friend);
+        d.users[ws.username].friends = user.friends;
+        d.users[friend].friends.push(ws.username);
+        saveData(d);
+        console.log(`You are now friends with ${friend}`);
+        ws.send(
+          JSON.stringify({
+            type: "friendAdded",
+            friends: user.friends,
+            message: `You are now friends with ${friend}`,
+          })
+        );
+        if (clients.find((client) => client.username === friend)) {
+          clients
+            .find((client) => client.username === friend)
+            .send(
+              JSON.stringify({
+                type: "friendAdded",
+                friends: getUser(friend).friends,
+                message: `You are now friends with ${friend}`,
+              })
+            );
+        }
       }
     }
   });
