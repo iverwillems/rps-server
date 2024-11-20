@@ -469,6 +469,30 @@ wss.on("connection", (ws) => {
       );
     }
 
+    if (data.type === "denyChallenge") {
+      const opponent = findPlayerByUsername(data.opponent);
+      const gameId = data.gameId;
+
+      delete ongoingGames[gameId];
+
+      ws.send(
+        JSON.stringify({
+          type: "deniedChallenge",
+          message: "You have exited the queue.",
+        })
+      );
+
+      if (opponent) {
+        opponent.send(
+          JSON.stringify({
+            type: "deniedChallenge",
+            message: "Your opponent has exited the queue.",
+          })
+        );
+        console.log(`${ws.username} has exited the queue.`);
+      }
+    }
+
     if (data.type === "exitQueue") {
       const opponent = findPlayerByUsername(data.opponent);
       const gameId = data.gameId;
