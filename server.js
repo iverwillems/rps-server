@@ -360,6 +360,29 @@ wss.on("connection", (ws) => {
       }
     }
 
+    if (data.type === "challenge") {
+      const opponent = findPlayerByUsername(data.opponent);
+      if (opponent) {
+        let gameId = generateGameId(ws.username, opponent.username);
+
+        opponent.send(
+          JSON.stringify({
+            type: "challenge",
+            opponent: ws.username,
+            gameId: gameId,
+          })
+        );
+
+        ws.send(
+          JSON.stringify({
+            type: "challenging",
+            opponent: opponent.username,
+            gameId: gameId,
+          })
+        );
+      }
+    }
+
     if (data.type === "findMatch") {
       if (matchQueue.length > 0) {
         const opponent = matchQueue.shift(); // Get the first user from the queue
@@ -423,6 +446,27 @@ wss.on("connection", (ws) => {
         // Create a new game and add it to the ongoingGames
         ongoingGames[gameId] = gatherGameData(ws.username, opponent.username);
       }
+    }
+
+    if (data.type === "acceptChallenge") {
+      const opponent = findPlayerByUsername(data.opponent);
+
+      let gameId = data.gameId;
+
+      // If the game already exists, it means the opponent has already accepted the match
+      ongoingGames[gameId] = gatherGameData(ws.username, opponent.username);
+      ws.move = null;
+      opponent.move = null;
+
+      ws.inGame = true;
+      opponent.inGame = true;
+
+      ws.send(
+        JSON.stringify({ type: "gameStart", opponent: opponent.username })
+      );
+      opponent.send(
+        JSON.stringify({ type: "gameStart", opponent: ws.username })
+      );
     }
 
     if (data.type === "exitQueue") {
@@ -568,41 +612,6 @@ wss.on("connection", (ws) => {
           JSON.stringify({
             type: "opponentLeft",
           })
-        );
-        const opponent = null;
-      } else {
-        console.log(`Error: Opponent not found or not in game for rematch.`);
-      }
-    }
-
-    if (data.type === "requestRematch") {
-      const opponent = findPlayerByUsername(data.opponent);
-
-      if (opponent && opponent.inGame) {
-        console.log(
-          `${ws.username} requested a rematch with ${opponent.username}`
-        );
-
-        // Reset game state for both players
-        ws.currentMove = null;
-        opponent.currentMove = null;
-
-        // Notify both players to start a new game
-        ws.send(
-          JSON.stringify({
-            type: "gameStart",
-            opponent: opponent.username,
-          })
-        );
-        opponent.send(
-          JSON.stringify({
-            type: "gameStart",
-            opponent: ws.username,
-          })
-        );
-
-        console.log(
-          `Rematch started between ${ws.username} and ${opponent.username}`
         );
       } else {
         console.log(`Error: Opponent not found or not in game for rematch.`);

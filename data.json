@@ -162,7 +162,12 @@
         "game_1730217749590",
         "game_1730218131434",
         "game_1730218307472",
-        "game_1730218390803"
+        "game_1730218390803",
+        "game_1732115805189",
+        "game_1732116027124",
+        "game_1732116210037",
+        "game_1732116432581",
+        "game_1732116494280"
       ],
       "friends": [
         "ezra",
@@ -177,7 +182,13 @@
         "game_1730217749590",
         "game_1730218131434",
         "game_1730218307472",
-        "game_1730218390803"
+        "game_1730218390803",
+        "game_1732115805189",
+        "game_1732116027124",
+        "game_1732116210037",
+        "game_1732116432581",
+        "game_1732116494280",
+        "game_1732116809067"
       ],
       "friends": [
         "iver",
@@ -555,7 +566,9 @@
       "friends": []
     },
     "g": {
-      "gamesPlayed": [],
+      "gamesPlayed": [
+        "game_1732116809067"
+      ],
       "friends": []
     },
     "efwef": {
@@ -1987,6 +2000,330 @@
             "ezra": "paper"
           },
           "winner": "iver"
+        }
+      ]
+    },
+    "game_1732115805189": {
+      "timestamp": "2024-11-20T15:16:14.859Z",
+      "players": {
+        "iver": {
+          "result": "loss",
+          "wins": 1,
+          "moves": [
+            "paper",
+            "rock",
+            "paper",
+            "paper"
+          ]
+        },
+        "ezra": {
+          "result": "win",
+          "wins": 3,
+          "moves": [
+            "scissors",
+            "scissors",
+            "rock",
+            "rock"
+          ]
+        }
+      },
+      "rounds": [
+        {
+          "roundNumber": 1,
+          "moves": {
+            "iver": "paper",
+            "ezra": "scissors"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 2,
+          "moves": {
+            "iver": "rock",
+            "ezra": "scissors"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 3,
+          "moves": {
+            "iver": "paper",
+            "ezra": "rock"
+          },
+          "winner": "iver"
+        },
+        {
+          "roundNumber": 4,
+          "moves": {
+            "iver": "paper",
+            "ezra": "rock"
+          },
+          "winner": "ezra"
+        }
+      ]
+    },
+    "game_1732116027124": {
+      "timestamp": "2024-11-20T15:20:07.603Z",
+      "players": {
+        "iver": {
+          "result": "loss",
+          "wins": 0,
+          "moves": [
+            "scissors",
+            "scissors",
+            "scissors"
+          ]
+        },
+        "ezra": {
+          "result": "win",
+          "wins": 3,
+          "moves": [
+            "paper",
+            "paper",
+            "paper"
+          ]
+        }
+      },
+      "rounds": [
+        {
+          "roundNumber": 1,
+          "moves": {
+            "iver": "scissors",
+            "ezra": "paper"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 2,
+          "moves": {
+            "iver": "scissors",
+            "ezra": "paper"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 3,
+          "moves": {
+            "iver": "scissors",
+            "ezra": "paper"
+          },
+          "winner": "ezra"
+        }
+      ]
+    },
+    "game_1732116210037": {
+      "timestamp": "2024-11-20T15:23:04.619Z",
+      "players": {
+        "iver": {
+          "result": "loss",
+          "wins": 0,
+          "moves": [
+            "scissors",
+            "paper",
+            "paper"
+          ]
+        },
+        "ezra": {
+          "result": "win",
+          "wins": 3,
+          "moves": [
+            "paper",
+            "scissors",
+            "scissors"
+          ]
+        }
+      },
+      "rounds": [
+        {
+          "roundNumber": 1,
+          "moves": {
+            "iver": "scissors",
+            "ezra": "paper"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 2,
+          "moves": {
+            "iver": "paper",
+            "ezra": "scissors"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 3,
+          "moves": {
+            "iver": "paper",
+            "ezra": "scissors"
+          },
+          "winner": "ezra"
+        }
+      ]
+    },
+    "game_1732116432581": {
+      "timestamp": "2024-11-20T15:26:52.010Z",
+      "players": {
+        "ezra": {
+          "result": "win",
+          "wins": 3,
+          "moves": [
+            "paper",
+            "scissors",
+            "scissors"
+          ]
+        },
+        "iver": {
+          "result": "loss",
+          "wins": 0,
+          "moves": [
+            "scissors",
+            "paper",
+            "paper"
+          ]
+        }
+      },
+      "rounds": [
+        {
+          "roundNumber": 1,
+          "moves": {
+            "ezra": "paper",
+            "iver": "scissors"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 2,
+          "moves": {
+            "ezra": "scissors",
+            "iver": "paper"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 3,
+          "moves": {
+            "ezra": "scissors",
+            "iver": "paper"
+          },
+          "winner": "ezra"
+        }
+      ]
+    },
+    "game_1732116494280": {
+      "timestamp": "2024-11-20T15:27:28.882Z",
+      "players": {
+        "ezra": {
+          "result": "loss",
+          "wins": 2,
+          "moves": [
+            "rock",
+            "rock",
+            "scissors",
+            "paper",
+            "paper"
+          ]
+        },
+        "iver": {
+          "result": "win",
+          "wins": 3,
+          "moves": [
+            "paper",
+            "scissors",
+            "paper",
+            "scissors",
+            "rock"
+          ]
+        }
+      },
+      "rounds": [
+        {
+          "roundNumber": 1,
+          "moves": {
+            "ezra": "rock",
+            "iver": "paper"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 2,
+          "moves": {
+            "ezra": "rock",
+            "iver": "scissors"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 3,
+          "moves": {
+            "ezra": "scissors",
+            "iver": "paper"
+          },
+          "winner": "iver"
+        },
+        {
+          "roundNumber": 4,
+          "moves": {
+            "ezra": "paper",
+            "iver": "scissors"
+          },
+          "winner": "iver"
+        },
+        {
+          "roundNumber": 5,
+          "moves": {
+            "ezra": "paper",
+            "iver": "rock"
+          },
+          "winner": "iver"
+        }
+      ]
+    },
+    "game_1732116809067": {
+      "timestamp": "2024-11-20T15:33:08.377Z",
+      "players": {
+        "g": {
+          "result": "loss",
+          "wins": 0,
+          "moves": [
+            "scissors",
+            "scissors",
+            "scissors"
+          ]
+        },
+        "ezra": {
+          "result": "win",
+          "wins": 3,
+          "moves": [
+            "paper",
+            "paper",
+            "paper"
+          ]
+        }
+      },
+      "rounds": [
+        {
+          "roundNumber": 1,
+          "moves": {
+            "g": "scissors",
+            "ezra": "paper"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 2,
+          "moves": {
+            "g": "scissors",
+            "ezra": "paper"
+          },
+          "winner": "ezra"
+        },
+        {
+          "roundNumber": 3,
+          "moves": {
+            "g": "scissors",
+            "ezra": "paper"
+          },
+          "winner": "ezra"
         }
       ]
     }
